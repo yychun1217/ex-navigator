@@ -2,11 +2,34 @@
 
 import React, {
   Image,
-  Navigator,
   PropTypes,
   Text,
   View,
 } from 'react-native';
+
+class Navigator extends React.Navigator {
+  render() {
+    this._renderNavigationBar = () =>{
+       let { navigationBar } = this.props;
+       if (!navigationBar) {
+         return null;
+       }
+       return React.cloneElement(navigationBar, {
+         ref: (navBar) => {
+           console.log("Navigator2 ref");
+           this._navBar = navBar;
+           if (navigationBar && typeof navigationBar.ref === 'function') {
+             navigationBar.ref(navBar);
+           }
+         },
+         navigator: this._navigationBarNavigator,
+         navState: this.state,
+       });
+     }
+    console.log('render navigator 2');
+    return super.render();
+  }
+}
 
 import invariant from 'invariant';
 import cloneReferencedElement from 'react-native-clone-referenced-element';
