@@ -7,6 +7,16 @@ import React, {
   View,
 } from 'react-native';
 
+/*
+use our custom naivgator instead of React.Navigator for react-native version 0.17 temp,
+since there is a bug in the official navigator
+https://github.com/facebook/react-native/pull/4941
+Since the fix is not merged into react-native 0.17-stable branch,
+we use the following hot-fix instead
+
+Should change after the fix is merged into 0.17-stable branch
+*/
+
 class Navigator extends React.Navigator {
   render() {
     this._renderNavigationBar = () =>{
